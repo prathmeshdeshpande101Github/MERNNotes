@@ -1,0 +1,49 @@
+1. git clone -----url-----
+	create copy of repo in local machine
+
+2. git add .
+	add all files to staged area
+
+3. git status
+	check the status of repo
+
+4. git commit -m "MEssage"
+	create snapshot of changed repo
+
+5. git push origin main'
+	changes added to repo
+
+6. git pull origin main
+	create copy and replace the local repo
+
+7. git config --global credential.useHttpPath true
+	give ability to push changes
+
+8. git config --global user.name name
+	add credentials
+
+9. git checkout branch_name
+	edit the branch
+
+10.git branches
+	all branches
+11.git merge  branch_name
+	merge two branches
+
+12.sudo apt update
+
+13.sudo apt install docker.io
+
+14.git clone ----url----
+
+15. cd repo
+
+16. sudo docker build -t image_name .
+
+17. sudo systemctl status  docker
+
+18. sudo docker run --name server_name -d -p port:port image_name
+
+19. sudo docker images
+
+20. sudo docker psd 
