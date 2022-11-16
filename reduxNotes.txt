@@ -1,0 +1,118 @@
+1.
+problem 
+
+
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { applyMiddleware, createStore, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import rootReducer from './reducers'
+import loggerMiddleware from './middleware/logger'
+import monitorReducerEnhancer from './enhancers/monitorReducer'
+import App from './components/App'
+
+const middlewareEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware)
+const composedEnhancers = compose(middlewareEnhancer, monitorReducerEnhancer)
+
+const store = createStore(rootReducer, undefined, composedEnhancers)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+
+Solution
+
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './components/App'
+import configureStore from './configureStore'
+
+const store = configureStore()
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+
+2.
+
+function todos(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      // Return a new array
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case 'COMPLETE_TODO':
+      // Return a new array
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          // Copy the object before mutating
+          return Object.assign({}, todo, {
+            completed: true
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+3.
+
+export function addTodo(text) {
+  return { type: 'ADD_TODO', text }
+}
+
+
+handleClick() {
+  // Works! (but you need to grab store somehow)
+  store.dispatch(addTodo('Fix the issue'))
+}
+
+4. Basic structure 
+
+function counter(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
+
+const postsReducer = combineReducers({
+  byId: postsById,
+  allIds: allPosts
+})
+
+
+5.dispatch action
+
+store.dispatch({
+  type: 'ADD_COMMENT',
+  payload: {
+    id: 123,
+    text: 'This is a comment',
+    postId: 1
+  }
+})
+
+6. redux undo
+
+
+
